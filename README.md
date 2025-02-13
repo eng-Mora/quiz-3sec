@@ -183,7 +183,7 @@ function showResult() {
 }
 
 function sendResultToSheet() {
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwSScQmlz-SiAqkP-4WarxHkvyZ4RhE_mQUPKiIoknmKg-vydQpewDUIaCaWIHzZwcT/exec";
+   const scriptURL = "https://script.google.com/macros/s/AKfycbwKVWnhmVL0sRNZrdnMin4cjQp9u4LUsNVBADwNGf-lSndUEFFYc8VsCvy5zN9utNkImg/exec";
 
 function checkLogin() {
     let inputCode = document.getElementById("accessCode").value;
@@ -221,6 +221,7 @@ function showResult() {
     .then(data => console.log("تم إرسال البيانات بنجاح: ", data))
     .catch(error => console.error("خطأ في الإرسال: ", error));
 }
+
 
 
 loadQuestions();
