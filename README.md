@@ -184,18 +184,31 @@ function showResult() {
 
 function sendResultToSheet() {
     const scriptURL = "https://script.google.com/macros/s/AKfycbwSScQmlz-SiAqkP-4WarxHkvyZ4RhE_mQUPKiIoknmKg-vydQpewDUIaCaWIHzZwcT/exec";
+
+function showResult() {
+    document.getElementById("quiz").style.display = "none";
+    document.querySelector("#finish").style.display = "none";
+    let resultDiv = document.getElementById("result");
+    resultDiv.style.display = "block";
     
+    let studentName = prompt("أدخل اسمك:");
+    if (!studentName) {
+        alert("يجب إدخال الاسم!");
+        return;
+    }
+    
+    let scoreText = `لقد أكملت الامتحان! درجتك: ${score} من ${questions.length}`;
+    resultDiv.innerHTML = `<h3>${scoreText}</h3>`;
+    
+    // إرسال البيانات إلى Google Sheets
     fetch(scriptURL, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-            "name": studentName,
-            "score": score
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: studentName, score: score, total: questions.length })
     })
     .then(response => response.text())
-    .then(data => console.log("تم إرسال النتيجة بنجاح", data))
-    .catch(error => console.error("خطأ في الإرسال", error));
+    .then(data => console.log("تم إرسال البيانات بنجاح: ", data))
+    .catch(error => console.error("خطأ في الإرسال: ", error));
 }
 
 loadQuestions();
