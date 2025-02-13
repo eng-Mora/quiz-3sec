@@ -185,6 +185,17 @@ function showResult() {
 function sendResultToSheet() {
     const scriptURL = "https://script.google.com/macros/s/AKfycbwSScQmlz-SiAqkP-4WarxHkvyZ4RhE_mQUPKiIoknmKg-vydQpewDUIaCaWIHzZwcT/exec";
 
+function checkLogin() {
+    let inputCode = document.getElementById("accessCode").value;
+    const correctCode = "2526";
+    if (inputCode === correctCode) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("exam").style.display = "block";
+    } else {
+        document.getElementById("error").style.display = "block";
+    }
+}
+
 function showResult() {
     document.getElementById("quiz").style.display = "none";
     document.querySelector("#finish").style.display = "none";
@@ -210,6 +221,7 @@ function showResult() {
     .then(data => console.log("تم إرسال البيانات بنجاح: ", data))
     .catch(error => console.error("خطأ في الإرسال: ", error));
 }
+
 
 loadQuestions();
 
