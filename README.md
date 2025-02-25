@@ -4,11 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة الطلاب</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        
         body { 
-            font-family: Arial, sans-serif; 
+            font-family: 'Tajawal', sans-serif; 
             text-align: center; 
             direction: rtl; 
-            background-color: #f4f4f4; 
+            background: linear-gradient(135deg, #3A1C71, #D76D77, #FFAF7B);
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -18,34 +20,47 @@
             flex-direction: column;
         }
         .container {
-            width: 300px;
-            padding: 20px;
-            background: #0078D4;
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 380px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 20px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.02);
         }
         h1 {
-            font-size: 24px;
+            font-size: 30px;
+            color: #3A1C71;
+            margin-bottom: 25px;
         }
         input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: none;
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border: 2px solid #D76D77;
             text-align: center;
+            font-size: 18px;
+            background: #f9f9f9;
         }
         button {
-            padding: 10px 20px;
-            background: #005A9E;
+            width: 100%;
+            padding: 15px;
+            background: #3A1C71;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            transition: 0.3s;
         }
         button:hover {
-            background: #003E73;
+            background: #D76D77;
         }
         .form-container {
             display: none;
@@ -89,3 +104,4 @@
     <div id="formContainer" class="form-container">
         <iframe id="formEmbed"></iframe>
     </div>
+
