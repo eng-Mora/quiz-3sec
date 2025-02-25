@@ -9,9 +9,15 @@
             text-align: center; 
             direction: rtl; 
             background-color: #f4f4f4; 
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
         .container {
-            margin: 100px auto;
             width: 300px;
             padding: 20px;
             background: #0078D4;
@@ -41,6 +47,16 @@
         button:hover {
             background: #003E73;
         }
+        .form-container {
+            display: none;
+            width: 100%;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
     <script>
         const accessCodes = {
@@ -55,7 +71,9 @@
         function checkAccess() {
             let code = document.getElementById("codeInput").value;
             if (accessCodes[code]) {
-                window.location.href = accessCodes[code];
+                document.getElementById("loginContainer").style.display = "none";
+                document.getElementById("formContainer").style.display = "block";
+                document.getElementById("formEmbed").src = accessCodes[code];
             } else {
                 alert("كود غير صحيح، الرجاء المحاولة مرة أخرى.");
             }
@@ -63,8 +81,11 @@
     </script>
 </head>
 <body>
-    <div class="container">
+    <div id="loginContainer" class="container">
         <h1>تسجيل الدخول</h1>
         <input type="text" id="codeInput" placeholder="أدخل الكود الخاص بك">
         <button onclick="checkAccess()">دخول</button>
+    </div>
+    <div id="formContainer" class="form-container">
+        <iframe id="formEmbed"></iframe>
     </div>
