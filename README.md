@@ -2,187 +2,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>امتحان أونلاين</title>
+    <title>منصة الطلاب</title>
     <style>
-        body {
-            font-family: 'Tahoma', sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            direction: rtl;
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            direction: rtl; 
+            background-color: #f4f4f4; 
         }
         .container {
-            width: 60%;
-            margin: auto;
+            margin: 100px auto;
+            width: 300px;
             padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-            text-align: right;
-        }
-        h2 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        .question {
-            background: #ecf0f1;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .option {
-            padding: 10px;
-            background-color: #d7dde0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .option:hover, .selected {
-            background-color: #2980b9;
+            background: #0078D4;
             color: white;
-        }
-        #result {
-            font-size: 18px;
-            font-weight: bold;
-            color: #27ae60;
-            text-align: center;
-            margin-top: 20px;
-        }
-        #login {
-            display: block;
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
             border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
-        #login input {
+        h1 {
+            font-size: 24px;
+        }
+        input {
+            width: 90%;
             padding: 10px;
+            margin: 10px 0;
             border-radius: 5px;
             border: none;
-            width: 80%;
-            margin-bottom: 10px;
+            text-align: center;
         }
-        #login button {
+        button {
             padding: 10px 20px;
-            background: #27ae60;
+            background: #005A9E;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
         }
-        #login button:hover {
-            background: #219150;
-        }
-        #exam {
-            display: none;
-        }
-        button#finish {
-            padding: 12px 25px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-        button#finish:hover {
-            background: #c0392b;
+        button:hover {
+            background: #003E73;
         }
     </style>
-</head>
-<body>
-    <div class="container" id="login">
-        <h2>تسجيل الدخول</h2>
-        <p>يرجى إدخال اسمك والكود للمتابعة:</p>
-        <input type="text" id="studentName" placeholder="أدخل اسمك">
-        <input type="password" id="accessCode" placeholder="أدخل الكود">
-        <button onclick="checkLogin()">دخول</button>
-        <p id="error" style="color: red; display: none;">الكود غير صحيح!</p>
-    </div>
-
-    <div class="container" id="exam">
-        <h2>امتحان في الفيزياء</h2>
-        <div id="quiz"></div>
-        <button id="finish" onclick="showResult()">إنهاء الامتحان</button>
-        <div id="result" style="display:none;"></div>
-    </div>
-
     <script>
-        const correctCode = "2526";
-        let studentName = "";
+        const accessCodes = {
+            "16075": "https://forms.office.com/r/QBMJq48ECD",
+            "70126": "https://forms.office.com/r/QBMJq48ECD",
+            "86554": "https://forms.office.com/r/RM5FMb6q3y",
+            "48261": "https://forms.office.com/r/RM5FMb6q3y",
+            "2526": "https://forms.office.com/r/D87KEwa8Pg",
+            "4545": "https://forms.office.com/r/UZaTGWQQKK"
+        };
         
-        function checkLogin() {
-            studentName = document.getElementById("studentName").value;
-            let inputCode = document.getElementById("accessCode").value;
-            
-            if (studentName === "" || inputCode !== correctCode) {
-                document.getElementById("error").style.display = "block";
+        function checkAccess() {
+            let code = document.getElementById("codeInput").value;
+            if (accessCodes[code]) {
+                window.location.href = accessCodes[code];
             } else {
-                document.getElementById("login").style.display = "none";
-                document.getElementById("exam").style.display = "block";
+                alert("كود غير صحيح، الرجاء المحاولة مرة أخرى.");
             }
         }
-
-        const questions = [
-            { question: "ما وحدة قياس القوة؟", options: ["نيوتن", "جول", "واط", "أوم"], answer: "نيوتن" },
-            { question: "ما هي سرعة الضوء؟", options: ["300,000 كم/ث", "150,000 كم/ث", "100,000 كم/ث", "50,000 كم/ث"], answer: "300,000 كم/ث" }
-        ];
-        let score = 0;
-
-        function loadQuestions() {
-            let quizDiv = document.getElementById("quiz");
-            quizDiv.innerHTML = "";
-            questions.forEach((q, i) => {
-                let questionDiv = document.createElement("div");
-                questionDiv.classList.add("question");
-                questionDiv.innerHTML = `<p>${i + 1}. ${q.question}</p>`;
-                let optionsDiv = document.createElement("div");
-                optionsDiv.classList.add("options");
-                q.options.forEach(option => {
-                    let btn = document.createElement("button");
-                    btn.classList.add("option");
-                    btn.innerText = option;
-                    btn.onclick = () => selectOption(btn, i, option);
-                    optionsDiv.appendChild(btn);
-                });
-                questionDiv.appendChild(optionsDiv);
-                quizDiv.appendChild(questionDiv);
-            });
-        }
-
-        function selectOption(btn, index, option) {
-            let options = btn.parentNode.querySelectorAll("button");
-            options.forEach(opt => opt.classList.remove("selected"));
-            btn.classList.add("selected");
-            if (option === questions[index].answer) score++;
-        }
-
-        function showResult() {
-            document.getElementById("quiz").style.display = "none";
-            document.getElementById("finish").style.display = "none";
-            document.getElementById("result").innerHTML = `<h3>لقد أكملت الامتحان!</h3><p>درجتك: ${score} من ${questions.length}</p>`;
-            document.getElementById("result").style.display = "block";
-            sendResultToGoogleSheet();
-        }
-
-        function sendResultToGoogleSheet() {
-            fetch("https://script.google.com/macros/s/AKfycbwgVpXbiGo83sSjkN9kfbVKXg0Muro7_oXFNm7o9_T9KpvGxe6mpaoBcEjqgXdlDbVQ/exec", {
-                method: "POST",
-                body: JSON.stringify({ name: studentName, score: score }),
-                headers: { "Content-Type": "application/json" }
-            });
-        }
-
-        loadQuestions();
     </script>
+</head>
+<body>
+    <div class="container">
+        <h1>تسجيل الدخول</h1>
+        <input type="text" id="codeInput" placeholder="أدخل الكود الخاص بك">
+        <button onclick="checkAccess()">دخول</button>
+    </div>
