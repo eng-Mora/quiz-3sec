@@ -86,9 +86,7 @@
         function checkAccess() {
             let code = document.getElementById("codeInput").value;
             if (accessCodes[code]) {
-                document.getElementById("loginContainer").style.display = "none";
-                document.getElementById("formContainer").style.display = "block";
-                document.getElementById("formEmbed").src = accessCodes[code];
+                window.location.href = accessCodes[code];
             } else {
                 alert("كود غير صحيح، الرجاء المحاولة مرة أخرى.");
             }
@@ -96,12 +94,8 @@
     </script>
 </head>
 <body>
-    <div id="loginContainer" class="container">
+    <div class="container">
         <h1>تسجيل الدخول</h1>
         <input type="text" id="codeInput" placeholder="أدخل الكود الخاص بك">
         <button onclick="checkAccess()">دخول</button>
     </div>
-    <div id="formContainer" class="form-container">
-        <iframe id="formEmbed"></iframe>
-    </div>
-
