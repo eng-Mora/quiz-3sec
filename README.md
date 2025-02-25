@@ -177,7 +177,7 @@
         }
 
         function sendResultToGoogleSheet() {
-            fetch("https://script.google.com/macros/s/AKfycbwKVWnhmVL0sRNZrdnMin4cjQp9u4LUsNVBADwNGf-lSndUEFFYc8VsCvy5zN9utNkImg/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbwgVpXbiGo83sSjkN9kfbVKXg0Muro7_oXFNm7o9_T9KpvGxe6mpaoBcEjqgXdlDbVQ/exec", {
                 method: "POST",
                 body: JSON.stringify({ name: studentName, score: score }),
                 headers: { "Content-Type": "application/json" }
