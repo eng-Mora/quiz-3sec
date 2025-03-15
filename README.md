@@ -27,7 +27,7 @@
 <body>
 
     <div class="container">
-        <h1>حاسبة الوقت</h1>
+        <h1>Mora</h1>
         <p id="currentDate"></p>
         <p id="currentTime"></p>
         <p id="daysRemaining"></p>
